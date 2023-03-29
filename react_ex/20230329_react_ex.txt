@@ -1,0 +1,339 @@
+function square(number) {
+    return number * number;
+}
+ 
+let number = 2;
+ 
+const element = <h1>{number} square is {square(number)}!</h1>;
+
+ReactDOM.render(
+    element,
+    document.getElementById('root')
+);
+
+//------------------------------
+
+let style = {
+    color: 'white',
+    backgroundColor: 'black'
+}
+
+const element = (
+    <div>
+        <h1>Hello!</h1>
+        <h2 style={style}>React.JS</h2>
+    </div>
+);
+
+ReactDOM.render(
+    element,
+    document.getElementById('root')
+);
+
+//------------------------------
+
+const jsxElement = <h1 className="test">Hello, JSX!</h1>;
+const objElement = React.createElement(
+    'h1',
+    {className: 'test'},
+    'Hello, Object!'
+);
+
+ReactDOM.render(
+    <div>
+        {jsxElement}
+        {objElement}
+    </div>,
+    document.getElementById('root')
+);
+
+//------------------------------
+
+const element = <h1>Hello, React!</h1>;
+ReactDOM.render(
+    element,
+    document.getElementById('root')
+)
+
+//------------------------------
+
+function tick() {
+    const element = (
+        <div>
+            <h1>React.JS Clock</h1>
+            <h2>{new Date().toLocaleTimeString()}.</h2>
+        </div>
+    );
+    ReactDOM.render(
+        element,
+        document.getElementById('root')
+    );
+}
+
+setInterval(tick, 1000);
+
+//------------------------------
+
+function Welcome(props) {
+    return (
+        <h1>Hello! {props.name}</h1>
+    );
+}
+
+const element = <Welcome name="beomy" />;
+ReactDOM.render(
+    element,
+    document.getElementById('root')
+);
+
+//------------------------------
+
+function NumberType(props) {
+    if (props.number % 2 == 0) {
+        return <h1>{props.number}는(은) 짝수입니다.</h1>;
+    } else {
+        return <h1>{props.number}는(은) 홀수입니다.</h1>;
+    }
+}
+
+ReactDOM.render(
+    <div>
+        <NumberType number="2" />
+        <NumberType number="3" />
+    </div>,
+    document.getElementById('root')
+);
+
+
+//------------------------------
+
+const UserInfo = {
+    Name: function (props) {
+        return <h1>저의 이름은 {props.name}</h1>;
+    },
+    Jab: function (props) {
+        return <h1>저의 직업은 {props.jab}</h1>;
+    }
+}
+
+ReactDOM.render(
+    <div>
+        <UserInfo.Name name="beomy" />
+        <UserInfo.Jab jab="programer" />
+    </div>,
+    document.getElementById('root')
+);
+
+//------------------------------
+
+function Post(props) {
+    return (
+        <div className="post">
+            <div className="postTitle">
+                <div className="title">
+                    <h1>제목 : {props.title}</h1>
+                </div>
+                <div className="subTitle">
+                    <h2>부제 : {props.subTitle}</h2>
+                </div>
+            </div>
+            <div className="postDate">
+                <div className="createDate">
+                    <p>최초 생성 날짜 : {props.createDate}</p>
+                </div>
+                <div className="modifyDate">
+                    <p>마지막 수정 날짜 : {props.modifyDate}</p>
+                </div>
+            </div>
+            <div className="postContents">
+                {props.contents}
+            </div>
+        </div>
+    );
+}
+
+ReactDOM.render(
+    <Post title="React.JS"
+      subTitle="Components"
+      createDate="0000-00-00"
+      modifyDate="1111-11-11"
+      contents="React.JS의 Components에 관련된 포스팅입니다." />,
+    document.getElementById('root')
+);
+
+//------------------------------
+
+function Square(props) {
+    return (
+        <h1>{props.number} squire is {props.number * props.number}</h1>
+    );
+}
+
+ReactDOM.render(
+    <Square number="2" />,
+    document.getElementById('root')
+);
+
+//------------------------------
+
+class Square extends React.Component {
+    render() {
+        return (
+            <h1>{this.props.number} squire is {this.props.number * this.props.number}</h1>
+        );
+    }
+}
+ReactDOM.render(
+    <Square number="2" />,
+    document.getElementById('root')
+);
+
+
+//------------------------------
+
+function StringChildren(props) {
+    return <h3>{JSON.stringify(props.children)}</h3>;
+}
+
+ReactDOM.render(
+    <StringChildren>문자열입니다.</StringChildren>,
+    document.getElementById('root')
+);
+
+//------------------------------
+
+function ObjectChildren(props) {
+    return <h3>{JSON.stringify(props.children)}</h3>;
+}
+
+ReactDOM.render(
+    <ObjectChildren>
+        <h1>h1</h1>
+    </ObjectChildren>,
+    document.getElementById('root')
+);
+
+//------------------------------
+
+class UserInfo extends React.Component {
+    render() {
+        return (
+            <div>
+                <h1>제 이름은 {this.props.name} 입니다.</h1>
+                <h1>제 직업은 {this.props.jab} 입니다.</h1>
+            </div>
+        );
+    }
+}
+
+UserInfo.defaultProps = {
+  jab: 'programer'
+}
+
+ReactDOM.render(
+    <UserInfo name="beomy" />,
+    document.getElementById('root')
+);
+
+//------------------------------
+
+function Title(props) {
+    return (
+        <h1>{props.title}</h1>
+    );
+}
+
+function Time(props) {
+    return (
+        <h2>{props.time.toLocaleTimeString()}</h2>
+    );
+}
+
+class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { time: new Date() };
+    }
+  
+    tick() {
+        this.setState({
+            time: new Date()
+        });
+    }
+  
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => this.tick(),
+            1000
+        );
+    }
+  
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+  
+    render() {
+        return (
+            <div>
+                <Title title={this.props.title} />
+                <Time time={this.state.time} />
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(
+    <Clock title="React.JS Clock" />,
+    document.getElementById('root')
+);
+
+//------------------------------
+
+class ComponentLifeCycle extends React.Component {
+    constructor(props) {
+        super(props);
+        console.log('constructor 입니다');
+    }
+  
+    componentWillMount() {
+        console.log('componentWillMount 입니다.');
+    }
+  
+    componentDidMount() {
+        console.log('componentDidMount 입니다.');      
+    }  
+  
+    componentWillReceiveProps() {
+        console.log('componentWillReceiveProps 입니다.');
+    }
+  
+    shouldComponentUpdate() {
+        console.log('shouldComponentUpdate 입니다.');
+        return true;
+    }
+  
+    componentWillUpdate() {
+        console.log('componentWillUpdate 입니다.');
+    }
+  
+    componentDidUpdate() {
+        console.log('componentDidUpdate 입니다.');
+    }
+  
+    render() {
+        console.log('render 입니다.');
+        return <div>컴포넌트 생명주기 메소드를 살펴봅시다.</div>;
+    }
+}
+
+ReactDOM.render(
+    <ComponentLifeCycle />,
+    document.getElementById('root')
+)
+
+setInterval(function () {
+  ReactDOM.render(
+      <ComponentLifeCycle type="test"/>,
+      document.getElementById('root')
+  )  
+}, 3000);
